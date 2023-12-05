@@ -75,6 +75,10 @@ jest
     createView: jest.fn(),
     customBubblingEventTypes: {},
     customDirectEventTypes: {},
+    getConstants: () => ({
+      ViewManagerNames: []
+    }),
+    getDefaultEventTypes: jest.fn(),
     dispatchViewManagerCommand: jest.fn(),
     focus: jest.fn(),
     getViewManagerConfig: jest.fn(name => {
@@ -87,6 +91,8 @@ jest
           },
         };
       }
+
+      return {NativeProps: {}}
     }),
     hasViewManagerConfig: jest.fn(name => {
       return name === 'AndroidDrawerLayout';
@@ -125,9 +131,9 @@ jest
 
     return Image;
   })
-  .mock('../Libraries/Text/Text', () =>
-    mockComponent('../Libraries/Text/Text', MockNativeMethods),
-  )
+  // .mock('../Libraries/Text/Text', () =>
+  //   mockComponent('../Libraries/Text/Text', MockNativeMethods),
+  // )
   .mock('../Libraries/Components/TextInput/TextInput', () =>
     mockComponent('../Libraries/Components/TextInput/TextInput', {
       ...MockNativeMethods,
@@ -141,9 +147,9 @@ jest
     const mockModal = jest.requireActual('./mockModal');
     return mockModal(baseComponent);
   })
-  .mock('../Libraries/Components/View/View', () =>
-    mockComponent('../Libraries/Components/View/View', MockNativeMethods),
-  )
+  // .mock('../Libraries/Components/View/View', () =>
+  //   mockComponent('../Libraries/Components/View/View', MockNativeMethods),
+  // )
   .mock('../Libraries/Components/AccessibilityInfo/AccessibilityInfo', () => ({
     __esModule: true,
     default: {
@@ -338,7 +344,8 @@ jest
       createTimer: jest.fn(),
       deleteTimer: jest.fn(),
     },
-    UIManager: {},
+    UIManager: {
+    },
     BlobModule: {
       getConstants: () => ({BLOB_URI_SCHEME: 'content', BLOB_URI_HOST: null}),
       addNetworkingHandler: jest.fn(),
@@ -367,47 +374,47 @@ jest
       }),
     },
   }))
-  .mock('../Libraries/NativeComponent/NativeComponentRegistry', () => {
-    return {
-      get: jest.fn((name, viewConfigProvider) => {
-        return jest.requireActual('./mockNativeComponent').default(name);
-      }),
-      getWithFallback_DEPRECATED: jest.fn((name, viewConfigProvider) => {
-        return jest.requireActual('./mockNativeComponent').default(name);
-      }),
-      setRuntimeConfigProvider: jest.fn(),
-    };
-  })
-  .mock('../Libraries/ReactNative/requireNativeComponent', () => {
-    return jest.requireActual('./mockNativeComponent');
-  })
-  .mock(
-    '../Libraries/Utilities/verifyComponentAttributeEquivalence',
-    () => function () {},
-  )
+  // .mock('../Libraries/NativeComponent/NativeComponentRegistry', () => {
+  //   return {
+  //     get: jest.fn((name, viewConfigProvider) => {
+  //       return jest.requireActual('./mockNativeComponent').default(name);
+  //     }),
+  //     getWithFallback_DEPRECATED: jest.fn((name, viewConfigProvider) => {
+  //       return jest.requireActual('./mockNativeComponent').default(name);
+  //     }),
+  //     setRuntimeConfigProvider: jest.fn(),
+  //   };
+  // })
+  // .mock('../Libraries/ReactNative/requireNativeComponent', () => {
+  //   return jest.requireActual('./mockNativeComponent');
+  // })
+  // .mock(
+  //   '../Libraries/Utilities/verifyComponentAttributeEquivalence',
+  //   () => function () {},
+  // )
   .mock('../Libraries/Vibration/Vibration', () => ({
     vibrate: jest.fn(),
     cancel: jest.fn(),
   }))
-  .mock('../Libraries/Components/View/ViewNativeComponent', () => {
-    const React = require('react');
-    const Component = class extends React.Component {
-      render() {
-        return React.createElement('View', this.props, this.props.children);
-      }
-    };
+  // .mock('../Libraries/Components/View/ViewNativeComponent', () => {
+  //   const React = require('react');
+  //   const Component = class extends React.Component {
+  //     render() {
+  //       return React.createElement('View', this.props, this.props.children);
+  //     }
+  //   };
 
-    Component.displayName = 'View';
+  //   Component.displayName = 'View';
 
-    return {
-      __esModule: true,
-      default: Component,
-    };
-  })
-  // In tests, we can use the default version instead of the one using
-  // dependency injection.
-  .mock('../Libraries/ReactNative/RendererProxy', () => {
-    return jest.requireActual(
-      '../Libraries/ReactNative/RendererImplementation',
-    );
-  });
+  //   return {
+  //     __esModule: true,
+  //     default: Component,
+  //   };
+  // })
+  // // In tests, we can use the default version instead of the one using
+  // // dependency injection.
+  // .mock('../Libraries/ReactNative/RendererProxy', () => {
+  //   return jest.requireActual(
+  //     '../Libraries/ReactNative/RendererImplementation',
+  //   );
+  // });
