@@ -28,44 +28,6 @@ module.exports = class ReactNativeEnvironment extends NodeEnv {
         value: true,
         writable: true,
       },
-      cancelAnimationFrame: {
-        configurable: true,
-        enumerable: true,
-        value: (id: TimeoutID) => clearTimeout(id),
-        writable: true,
-      },
-      nativeFabricUIManager: {
-        configurable: true,
-        enumerable: true,
-        value: {},
-        writable: true,
-      },
-      performance: {
-        configurable: true,
-        enumerable: true,
-        value: {
-          now: () => Date.now,
-        },
-        writable: true,
-      },
-      // regeneratorRuntime: {
-      //   configurable: true,
-      //   enumerable: true,
-      //   value: jest.requireActual('regenerator-runtime/runtime'),
-      //   writable: true,
-      // },
-      requestAnimationFrame: {
-        configurable: true,
-        enumerable: true,
-        value: callback => setTimeout(() => callback(Date.now()), 0),
-        writable: true,
-      },
-      window: {
-        configurable: true,
-        enumerable: true,
-        value: global,
-        writable: true,
-      },
     });
   }
 
