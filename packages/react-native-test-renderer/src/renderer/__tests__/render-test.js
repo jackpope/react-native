@@ -10,7 +10,7 @@
 
 'use strict';
 
-import * as ReactNativeTestRenderer from '../ReactNativeTestRenderer';
+import * as ReactNativeTestRenderer from '../index';
 
 import * as React from 'react';
 import {Text, View} from 'react-native';
