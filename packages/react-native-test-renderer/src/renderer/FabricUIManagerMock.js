@@ -17,15 +17,15 @@ import type {
     MeasureLayoutOnSuccessCallback,
     MeasureOnSuccessCallback,
     Node,
-  } from '../react-native/Libraries/Renderer/shims/ReactNativeTypes';
-  import type {RootTag} from '../react-native/Libraries/ReactNative/RootTag.js';
+  } from '../../../react-native/Libraries/Renderer/shims/ReactNativeTypes';
+  import type {RootTag} from '../../../react-native/Libraries/ReactNative/RootTag.js';
   import type {
     NodeProps,
     NodeSet,
     Spec as FabricUIManager,
-  } from '../react-native/Libraries/ReactNative/FabricUIManager.js';
+  } from '../../../react-native/Libraries/ReactNative/FabricUIManager.js';
 
-  import {createRootTag} from '../react-native/Libraries/ReactNative/RootTag.js';
+  import {createRootTag} from '../../../react-native/Libraries/ReactNative/RootTag.js';
 
   export type NodeMock = {
     children: NodeSet,
@@ -438,7 +438,7 @@ import type {
 
     compareDocumentPosition: jest.fn((node: Node, otherNode: Node): number => {
       /* eslint-disable no-bitwise */
-      const ReadOnlyNode = require('../react-native/Libraries/DOM/Nodes/ReadOnlyNode.js').default;
+      const ReadOnlyNode = require('../../../react-native/Libraries/DOM/Nodes/ReadOnlyNode.js').default;
 
       // Quick check for node vs. itself
       if (fromNode(node).reactTag === fromNode(otherNode).reactTag) {
