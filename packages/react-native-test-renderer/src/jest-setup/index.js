@@ -11,53 +11,6 @@
 
 jest.requireActual('@react-native/js-polyfills/error-guard');
 
-Object.defineProperties(global, {
-  __DEV__: {
-    configurable: true,
-    enumerable: true,
-    value: true,
-    writable: true,
-  },
-  cancelAnimationFrame: {
-    configurable: true,
-    enumerable: true,
-    value: id => clearTimeout(id),
-    writable: true,
-  },
-  nativeFabricUIManager: {
-    configurable: true,
-    enumerable: true,
-    value: {},
-    writable: true,
-  },
-  performance: {
-    configurable: true,
-    enumerable: true,
-    value: {
-      now: jest.fn(Date.now),
-    },
-    writable: true,
-  },
-  regeneratorRuntime: {
-    configurable: true,
-    enumerable: true,
-    value: jest.requireActual('regenerator-runtime/runtime'),
-    writable: true,
-  },
-  requestAnimationFrame: {
-    configurable: true,
-    enumerable: true,
-    value: callback => setTimeout(() => callback(jest.now()), 0),
-    writable: true,
-  },
-  window: {
-    configurable: true,
-    enumerable: true,
-    value: global,
-    writable: true,
-  },
-});
-
 jest
   .mock('../../../react-native/Libraries/ReactNative/UIManager', () => ({
     AndroidViewPager: {
@@ -184,7 +137,13 @@ jest
     },
     PlatformConstants: {
       getConstants() {
-        return {};
+        return {
+          reactNativeVersion: {
+            major: 1000,
+            minor: 0,
+            patch: 0,
+          },
+        };
       },
     },
     PushNotificationManager: {
@@ -216,13 +175,6 @@ jest
       getInitialNotification: jest.fn(() => Promise.resolve(null)),
       addListener: jest.fn(),
       removeListeners: jest.fn(),
-    },
-    SourceCode: {
-      getConstants() {
-        return {
-          scriptURL: null,
-        };
-      },
     },
     StatusBarManager: {
       setColor: jest.fn(),

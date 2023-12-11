@@ -14,12 +14,6 @@ module.exports = {
     defaultPlatform: 'ios',
     platforms: ['android', 'ios', 'native'],
   },
-  // transform: {
-  //   '^.+\\.(js|ts|tsx)$': 'babel-jest',
-  // },
-  // transformIgnorePatterns: [
-  //   'node_modules/(?!((jest-)?react-native|@react-native(-community)?)/)',
-  // ],
   setupFiles: ['./src/jest-setup/index.js'],
   testEnvironment: './src/jest-environment/index.js',
 };

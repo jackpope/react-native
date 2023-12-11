@@ -11,6 +11,96 @@
 
 const NodeEnv = require('jest-environment-node').TestEnvironment;
 
-module.exports = class ReactNativeEnv extends NodeEnv {
+module.exports = class ReactNativeEnvironment extends NodeEnv {
   customExportConditions = ['require', 'react-native'];
+
+  constructor(config: JestEnvironmentConfig, context: EnvironmentContext) {
+    super(config, context);
+    this.assignGlobals();
+    this.initializeTurboModuleRegistry();
+  }
+
+  assignGlobals() {
+    Object.defineProperties(this.global, {
+      __DEV__: {
+        configurable: true,
+        enumerable: true,
+        value: true,
+        writable: true,
+      },
+      cancelAnimationFrame: {
+        configurable: true,
+        enumerable: true,
+        value: (id: TimeoutID) => clearTimeout(id),
+        writable: true,
+      },
+      nativeFabricUIManager: {
+        configurable: true,
+        enumerable: true,
+        value: {},
+        writable: true,
+      },
+      performance: {
+        configurable: true,
+        enumerable: true,
+        value: {
+          now: () => Date.now,
+        },
+        writable: true,
+      },
+      // regeneratorRuntime: {
+      //   configurable: true,
+      //   enumerable: true,
+      //   value: jest.requireActual('regenerator-runtime/runtime'),
+      //   writable: true,
+      // },
+      requestAnimationFrame: {
+        configurable: true,
+        enumerable: true,
+        value: callback => setTimeout(() => callback(Date.now()), 0),
+        writable: true,
+      },
+      window: {
+        configurable: true,
+        enumerable: true,
+        value: global,
+        writable: true,
+      },
+    });
+  }
+
+  initializeTurboModuleRegistry() {
+    const dims = {width: 100, height: 100, scale: 1, fontScale: 1};
+    const DIMS = {
+      screen: {
+        ...dims,
+      },
+      window: {
+        ...dims,
+      },
+    };
+    this.global.__turboModuleProxy = name =>
+      ({
+        SourceCode: {getConstants: () => ({scriptURL: ''})},
+        WebSocketModule: {connect: () => {}},
+        FileReaderModule: {},
+        AppState: {getConstants: () => ({}), getCurrentAppState: () => ({})},
+        DeviceInfo: {getConstants: () => ({Dimensions: DIMS})},
+        UIManager: {getConstants: () => ({})},
+        Timing: {},
+        DevSettings: {},
+        PlatformConstants: {
+          getConstants: () => ({reactNativeVersion: '1000.0.0'}),
+        },
+        Networking: {},
+        ImageLoader: {},
+        NativePerformanceCxx: {},
+        NativePerformanceObserverCxx: {},
+        LogBox: {},
+        SettingsManager: {
+          getConstants: () => ({settings: {}})
+        },
+        LinkingManager: {},
+      })[name];
+  }
 };

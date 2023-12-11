@@ -8,7 +8,7 @@
  * @flow
  */
 
-import ReactNativeEnvironment from './jest-environment-react-native/index';
-import * as ReactNativeTestRenderer from './renderer/ReactNativeTestRenderer';
+import ReactNativeEnvironment from './src/jest-environment/index';
+import * as ReactNativeTestRenderer from './src/renderer/index';
 
 export { ReactNativeEnvironment, ReactNativeTestRenderer };
