@@ -7,11 +7,11 @@
  * @format
  */
 
-'use strict';
+"use strict";
 
 module.export = {
-  globalSetup: function() {},
-  globalTeardown: function() {},
-  testEnvironment: require('../jest-environment/index'),
-  setupFiles: [require('../jest-setup/index')],
+  globalSetup: "../jest-setup/index",
+  globalTeardown: function () {},
+  testEnvironment: "../jest-environment/index",
+  setupFiles: [],
 };

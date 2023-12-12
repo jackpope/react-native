@@ -44,6 +44,7 @@ function buildRenderResult(rootNode: RootReactNode): RenderResult {
 export async function render(
   element: Element<ElementType>,
 ): Promise<RenderResult> {
+  throw new Error("HERE");
   const manager = FabricUIManager.getFabricUIManager();
   if (!manager) {
     throw new Error('No FabricUIManager found');

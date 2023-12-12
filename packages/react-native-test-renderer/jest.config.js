@@ -14,5 +14,12 @@ module.exports = {
     defaultPlatform: 'ios',
     platforms: ['android', 'ios', 'native'],
   },
-  preset: require('./src/jest-preset/index')
+  transform: {
+    '^.+\\.(js|ts|tsx)$': 'babel-jest',
+  },
+  transformIgnorePatterns: [
+    'node_modules/(?!((jest-)?react-native|@react-native(-community)?)/)',
+  ],
+  setupFilesAfterEnv: ['./src/jest-setup/index'],
+  testEnvironment: './src/jest-environment/index',
 };

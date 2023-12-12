@@ -9,8 +9,6 @@
 
 'use strict';
 
-const {jest} = require('@jest/globals');
-
 jest.requireActual('@react-native/js-polyfills/error-guard');
 
 jest

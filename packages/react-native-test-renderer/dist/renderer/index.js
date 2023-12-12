@@ -70,14 +70,22 @@ function buildRenderResult(rootNode) {
   };
 }
 async function render(element) {
+  console.warn("*****START");
+  throw new Error("1")
   const manager = FabricUIManager.getFabricUIManager();
+  throw new Error("2")
+  console.warn("*****GOT THE MANAGER");
   if (!manager) {
     throw new Error("No FabricUIManager found");
   }
   const containerTag = Math.round(Math.random() * 1000000);
+  throw new Error("3")
+  console.warn("*****before render");
   await (0, _reactTestRenderer.act)(() => {
     _ReactFabric.default.render(element, containerTag, () => {}, true);
   });
+  throw new Error("4")
+  console.warn("*****after render");
 
   // $FlowFixMe
   const root = manager.getRoot(containerTag);
