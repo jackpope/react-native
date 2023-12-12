@@ -10,5 +10,6 @@
 
 import ReactNativeEnvironment from './src/jest-environment/index';
 import * as ReactNativeTestRenderer from './src/renderer/index';
+import * as ReactNativeJestSetup from './src/jest-setup/index'
 
-export { ReactNativeEnvironment, ReactNativeTestRenderer };
+export { ReactNativeEnvironment, ReactNativeTestRenderer, ReactNativeJestSetup };

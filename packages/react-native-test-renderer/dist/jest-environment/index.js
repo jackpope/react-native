@@ -7,23 +7,19 @@
  * @format
  */
 
-'use strict';
+"use strict";
 
-const NodeEnv = require('jest-environment-node').TestEnvironment;
-
+const NodeEnv = require("jest-environment-node").TestEnvironment;
 module.exports = class ReactNativeEnvironment extends NodeEnv {
-  customExportConditions = ['require', 'react-native'];
-
-  constructor(config: JestEnvironmentConfig, context: EnvironmentContext) {
+  customExportConditions = ["require", "react-native"];
+  constructor(config, context) {
     super(config, context);
   }
-
   async setup() {
     await super.setup();
     this.assignGlobals();
     this.initializeTurboModuleRegistry();
   }
-
   assignGlobals() {
     Object.defineProperties(this.global, {
       __DEV__: {
@@ -34,9 +30,13 @@ module.exports = class ReactNativeEnvironment extends NodeEnv {
       },
     });
   }
-
   initializeTurboModuleRegistry() {
-    const dims = {width: 100, height: 100, scale: 1, fontScale: 1};
+    const dims = {
+      width: 100,
+      height: 100,
+      scale: 1,
+      fontScale: 1,
+    };
     const DIMS = {
       screen: {
         ...dims,
@@ -45,18 +45,35 @@ module.exports = class ReactNativeEnvironment extends NodeEnv {
         ...dims,
       },
     };
-    this.global.__turboModuleProxy = name =>
+    this.global.__turboModuleProxy = (name) =>
       ({
-        SourceCode: {getConstants: () => ({scriptURL: ''})},
-        WebSocketModule: {connect: () => {}},
+        SourceCode: {
+          getConstants: () => ({
+            scriptURL: "",
+          }),
+        },
+        WebSocketModule: {
+          connect: () => {},
+        },
         FileReaderModule: {},
-        AppState: {getConstants: () => ({}), getCurrentAppState: () => ({})},
-        DeviceInfo: {getConstants: () => ({Dimensions: DIMS})},
-        UIManager: {getConstants: () => ({})},
+        AppState: {
+          getConstants: () => ({}),
+          getCurrentAppState: () => ({}),
+        },
+        DeviceInfo: {
+          getConstants: () => ({
+            Dimensions: DIMS,
+          }),
+        },
+        UIManager: {
+          getConstants: () => ({}),
+        },
         Timing: {},
         DevSettings: {},
         PlatformConstants: {
-          getConstants: () => ({reactNativeVersion: '1000.0.0'}),
+          getConstants: () => ({
+            reactNativeVersion: "1000.0.0",
+          }),
         },
         Networking: {},
         ImageLoader: {},
@@ -64,9 +81,11 @@ module.exports = class ReactNativeEnvironment extends NodeEnv {
         NativePerformanceObserverCxx: {},
         LogBox: {},
         SettingsManager: {
-          getConstants: () => ({settings: {}})
+          getConstants: () => ({
+            settings: {},
+          }),
         },
         LinkingManager: {},
-      })[name];
+      }[name]);
   }
 };
