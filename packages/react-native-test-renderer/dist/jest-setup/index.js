@@ -9,9 +9,9 @@
 
 "use strict";
 
-global.jest.requireActual("@react-native/js-polyfills/error-guard");
-global.jest
-  .mock("../../../react-native/Libraries/ReactNative/UIManager", () => ({
+jest.requireActual("@react-native/js-polyfills/error-guard");
+jest
+  .mock("react-native/Libraries/ReactNative/UIManager", () => ({
     AndroidViewPager: {
       Commands: {
         setPage: jest.fn(),
@@ -69,7 +69,7 @@ global.jest
     },
   }))
   // Mock modules defined by the native layer (ex: Objective-C, Java)
-  .mock("../../../react-native/Libraries/BatchedBridge/NativeModules", () => ({
+  .mock("react-native/Libraries/BatchedBridge/NativeModules", () => ({
     AlertManager: {
       alertWithArgs: jest.fn(),
     },

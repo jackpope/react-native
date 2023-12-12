@@ -9,10 +9,9 @@
 
 'use strict';
 
-module.exports = {
-  haste: {
-    defaultPlatform: 'ios',
-    platforms: ['android', 'ios', 'native'],
-  },
-  preset: require('./src/jest-preset/index')
+module.export = {
+  globalSetup: function() {},
+  globalTeardown: function() {},
+  testEnvironment: require('../jest-environment/index'),
+  setupFiles: [require('../jest-setup/index')],
 };
