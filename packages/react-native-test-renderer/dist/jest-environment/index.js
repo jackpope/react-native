@@ -29,6 +29,7 @@ module.exports = class ReactNativeEnvironment extends NodeEnv {
         writable: true,
       },
     });
+    this.global.IS_REACT_ACT_ENVIRONMENT = true;
   }
   initializeTurboModuleRegistry() {
     const dims = {
@@ -45,6 +46,7 @@ module.exports = class ReactNativeEnvironment extends NodeEnv {
         ...dims,
       },
     };
+    this.global.nativeModuleProxy = (name) => ({}[name]);
     this.global.__turboModuleProxy = (name) =>
       ({
         SourceCode: {

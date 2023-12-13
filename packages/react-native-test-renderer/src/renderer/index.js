@@ -41,16 +41,15 @@ function buildRenderResult(rootNode: RootReactNode): RenderResult {
   };
 }
 
-export async function render(
+export function render(
   element: Element<ElementType>,
-): Promise<RenderResult> {
-  throw new Error("HERE");
+): RenderResult {
   const manager = FabricUIManager.getFabricUIManager();
   if (!manager) {
     throw new Error('No FabricUIManager found');
   }
   const containerTag = Math.round(Math.random() * 1000000);
-  await act(() => {
+  act(() => {
     ReactFabric.render(element, containerTag, () => {}, true);
   });
 

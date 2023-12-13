@@ -47,23 +47,23 @@ describe('render', () => {
   })
 
   describe('toJSON', () => {
-    it('returns expected JSON output based on renderer component', async () => {
-      const result = await ReactNativeTestRenderer.render(<TestComponent />);
+    it('returns expected JSON output based on renderer component', () => {
+      const result = ReactNativeTestRenderer.render(<TestComponent />);
       expect(result.toJSON()).toMatchSnapshot();
     });
   });
 
   describe('findByTestID', () => {
-    it('returns the first element with a matching testID', async () => {
-      const result = await ReactNativeTestRenderer.render(<TestComponent2 />);
+    it('returns the first element with a matching testID', () => {
+      const result = ReactNativeTestRenderer.render(<TestComponent2 />);
       expect(result.findByTestID('world-container')).not.toBeNull();
     });
   });
 
   describe('press', () => {
-    it('invokes onPress callback', async () => {
+    it('invokes onPress callback', () => {
       let pressed = false;
-      const result = await ReactNativeTestRenderer.render(
+      const result = ReactNativeTestRenderer.render(
         <View>
           <Text testID="text" onPress={() => (pressed = true)}>
             Hello

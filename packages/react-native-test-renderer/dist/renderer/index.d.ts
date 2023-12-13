@@ -19,7 +19,5 @@ type RenderResult = {
   toJSON: () => string;
   findByTestID: (testID: string) => ReactNode;
 };
-export declare function render(
-  element: Element<ElementType>
-): Promise<RenderResult>;
+export declare function render(element: Element<ElementType>): RenderResult;
 export declare function fireEvent(node: ReactNode, eventName: "press"): void;
