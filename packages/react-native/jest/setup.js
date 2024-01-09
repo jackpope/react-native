@@ -75,6 +75,10 @@ jest
     createView: jest.fn(),
     customBubblingEventTypes: {},
     customDirectEventTypes: {},
+    getConstants: () => ({
+      ViewManagerNames: []
+    }),
+    getDefaultEventTypes: jest.fn(),
     dispatchViewManagerCommand: jest.fn(),
     focus: jest.fn(),
     getViewManagerConfig: jest.fn(name => {
@@ -87,6 +91,8 @@ jest
           },
         };
       }
+
+      return {NativeProps: {}}
     }),
     hasViewManagerConfig: jest.fn(name => {
       return name === 'AndroidDrawerLayout';
