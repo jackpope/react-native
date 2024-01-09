@@ -7,11 +7,11 @@
  * @format
  */
 
-"use strict";
+'use strict';
 
-const NodeEnv = require("jest-environment-node").TestEnvironment;
+const NodeEnv = require('jest-environment-node').TestEnvironment;
 module.exports = class ReactNativeEnvironment extends NodeEnv {
-  customExportConditions = ["require", "react-native"];
+  customExportConditions = ['require', 'react-native'];
   constructor(config, context) {
     super(config, context);
   }
@@ -28,8 +28,13 @@ module.exports = class ReactNativeEnvironment extends NodeEnv {
         value: true,
         writable: true,
       },
+      IS_REACT_ACT_ENVIRONMENT: {
+        configurable: true,
+        enumerable: true,
+        value: true,
+        writable: true,
+      },
     });
-    this.global.IS_REACT_ACT_ENVIRONMENT = true;
   }
   initializeTurboModuleRegistry() {
     const dims = {
@@ -46,12 +51,11 @@ module.exports = class ReactNativeEnvironment extends NodeEnv {
         ...dims,
       },
     };
-    this.global.nativeModuleProxy = (name) => ({}[name]);
-    this.global.__turboModuleProxy = (name) =>
+    this.global.__turboModuleProxy = name =>
       ({
         SourceCode: {
           getConstants: () => ({
-            scriptURL: "",
+            scriptURL: '',
           }),
         },
         WebSocketModule: {
@@ -74,13 +78,16 @@ module.exports = class ReactNativeEnvironment extends NodeEnv {
         DevSettings: {},
         PlatformConstants: {
           getConstants: () => ({
-            reactNativeVersion: "1000.0.0",
+            reactNativeVersion: '1000.0.0',
           }),
         },
         Networking: {},
         ImageLoader: {},
-        NativePerformanceCxx: {},
-        NativePerformanceObserverCxx: {},
+        NativePerformanceCxx: {
+          mark: (name, startTime) => {},
+          measure: () => {},
+        },
+        NativePerformanceObserverCxx: {clearEntries: () => {}},
         LogBox: {},
         SettingsManager: {
           getConstants: () => ({
@@ -88,6 +95,6 @@ module.exports = class ReactNativeEnvironment extends NodeEnv {
           }),
         },
         LinkingManager: {},
-      }[name]);
+      })[name];
   }
 };
