@@ -2,7 +2,10 @@
   "name": "@react-native/community-cli-plugin",
   "version": "0.74.0",
   "description": "Core CLI commands for React Native",
-  "keywords": ["react-native", "tools"],
+  "keywords": [
+    "react-native",
+    "tools"
+  ],
   "homepage": "https://github.com/facebook/react-native/tree/HEAD/packages/buid-scripts#readme",
   "bugs": "https://github.com/facebook/react-native/issues",
   "repository": {
@@ -11,8 +14,13 @@
     "directory": "packages/community-cli-plugin"
   },
   "license": "MIT",
-  "exports": { ".": "./dist/index.js", "./package.json": "./package.json" },
-  "files": ["dist"],
+  "exports": {
+    ".": "./src/index.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "@react-native/dev-middleware": "0.74.0",
     "@react-native-community/cli-server-api": "13.0.0",

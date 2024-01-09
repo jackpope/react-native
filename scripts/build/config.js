@@ -49,10 +49,6 @@ const buildConfig /*: BuildConfig */ = {
       target: 'node',
       emitTypeScriptDefs: true,
     },
-    'react-native-test-renderer': {
-      target: 'node',
-      emitTypeScriptDefs: true,
-    }
   },
 };
 

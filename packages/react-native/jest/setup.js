@@ -344,8 +344,7 @@ jest
       createTimer: jest.fn(),
       deleteTimer: jest.fn(),
     },
-    UIManager: {
-    },
+    UIManager: {},
     BlobModule: {
       getConstants: () => ({BLOB_URI_SCHEME: 'content', BLOB_URI_HOST: null}),
       addNetworkingHandler: jest.fn(),
